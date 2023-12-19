@@ -1,27 +1,29 @@
 package com.ihormanzii.currency.checker.controllers;
 
 import com.ihormanzii.currency.checker.models.CurrencyDTO;
-import com.ihormanzii.currency.checker.services.CurrencyService;
+import com.ihormanzii.currency.checker.services.impl.MonobankCurrencyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
-public class CurrencyController {
+@RequestMapping("monobank/currency")
+public class MonobankCurrencyController {
 
     @Autowired
-    private CurrencyService currencyService;
+    private MonobankCurrencyService monobankCurrencyService;
 
-    @GetMapping("/currency")
+    @GetMapping()
     public List<CurrencyDTO> getCurrency() {
-        return currencyService.getCurrency();
+        return monobankCurrencyService.getCurrency();
     }
 
-    @GetMapping("/currency/{currencyName}")
+    @GetMapping("/{currencyName}")
     public CurrencyDTO getCurrency(@PathVariable String currencyName) {
-        return currencyService.getCurrency(currencyName);
+        return monobankCurrencyService.getCurrency(currencyName);
     }
 }
